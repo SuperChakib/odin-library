@@ -38,13 +38,27 @@ initLibrary();
 displayLibrary();
 
 function initLibrary() {
-  if (localStorage.getItem("library") !== "[]")
+  if (localStorage.length && localStorage.getItem("library") !== "[]") {
     myLibrary = JSON.parse(localStorage.getItem("library"));
-  else {
+    myLibrary.forEach((book) => Object.setPrototypeOf(book, bookModel));
+  } else {
     addToLibrary("The Hobbit", "J.R.R. Tolkien", 1937, 295, false);
     addToLibrary("The Great Gatsby", "F. Scott Fitzgerald", 1925, 110, true);
     addToLibrary("To Kill a Mocking Bird", "Harper Lee", 1960, 384, false);
   }
+}
+function addToLibrary(title, author, year, nbPages, read) {
+  let newBook = Object.create(bookModel).init(
+    title,
+    author,
+    year,
+    nbPages,
+    read
+  );
+  myLibrary.push(newBook);
+  //the Storage.setItem the functionality seems to be limited to handle only string key/value pairs
+  //that's why JSON.stringify is used as a workaround
+  localStorage.setItem("library", JSON.stringify(myLibrary));
 }
 function displayForm() {
   bookForm.classList.remove("hiddenForm");
@@ -76,19 +90,6 @@ function submitBook(e) {
 function cancelForm(e) {
   e.preventDefault();
   bookForm.classList.add("hiddenForm");
-}
-function addToLibrary(title, author, year, nbPages, read) {
-  let newBook = Object.create(bookModel).init(
-    title,
-    author,
-    year,
-    nbPages,
-    read
-  );
-  myLibrary.push(newBook);
-  //the Storage.setItem the functionality seems to be limited to handle only string key/value pairs
-  //that's why JSON.stringify is used as a workaround
-  localStorage.setItem("library", JSON.stringify(myLibrary));
 }
 function displayLibrary() {
   collection.innerHTML = "";
