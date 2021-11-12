@@ -3,16 +3,16 @@ const bookModel = {
   init: function (title, author, year, nbPages, read) {
     this.title = title;
     this.author = author;
-    this.year = `first release: ${year}`;
+    this.year = `first released in ${year}`;
     this.nbPages = `${nbPages} pages`;
     this.read = read;
     return this;
   },
   // .info() doesn't work when using function expression... why???
   info: function () {
-    return `${this.title} by ${this.author}, first published in ${year}, ${
-      this.nbPages
-    } pages, ${this.read ? "already read" : "not read yet"}.`;
+    return `${this.title} by ${this.author}, ${this.year}, ${this.nbPages}, ${
+      this.read ? "already read" : "not read yet"
+    }.`;
   },
 };
 let collection = document.querySelector("#collection");
@@ -34,12 +34,18 @@ window.addEventListener("keyup", (e) => {
   if (e.key === "Escape") bookForm.classList.add("hiddenForm");
 });
 
-addToLibrary("The Hobbit", "J.R.R. Tolkien", 1937, 295, false);
-addToLibrary("The Great Gatsby", "F. Scott Fitzgerald", 1925, 110, true);
-addToLibrary("To Kill a Mocking Bird", "Harper Lee", 1960, 384, false);
-
+initLibrary();
 displayLibrary();
 
+function initLibrary() {
+  if (localStorage.getItem("library") !== "[]")
+    myLibrary = JSON.parse(localStorage.getItem("library"));
+  else {
+    addToLibrary("The Hobbit", "J.R.R. Tolkien", 1937, 295, false);
+    addToLibrary("The Great Gatsby", "F. Scott Fitzgerald", 1925, 110, true);
+    addToLibrary("To Kill a Mocking Bird", "Harper Lee", 1960, 384, false);
+  }
+}
 function displayForm() {
   bookForm.classList.remove("hiddenForm");
 }
@@ -80,6 +86,9 @@ function addToLibrary(title, author, year, nbPages, read) {
     read
   );
   myLibrary.push(newBook);
+  //the Storage.setItem the functionality seems to be limited to handle only string key/value pairs
+  //that's why JSON.stringify is used as a workaround
+  localStorage.setItem("library", JSON.stringify(myLibrary));
 }
 function displayLibrary() {
   collection.innerHTML = "";
@@ -94,13 +103,13 @@ function displayLibrary() {
       let elem = document.createElement("p");
       if (ownProp !== "read") elem.textContent = myLibrary[i][ownProp];
       else {
-        elem.innerHTML = `already read? <input type='checkbox' ${
-          myLibrary[i][ownProp] ? "checked" : ""
-        }></input>`;
-        elem.firstElementChild.addEventListener(
-          "change",
-          () => (myLibrary[i].read = !myLibrary[i].read)
-        );
+        elem.innerHTML = `${
+          myLibrary[i][ownProp]
+            ? '<button class="read">Read</button>'
+            : '<button class="notRead">Not Read</button>'
+        }`;
+        elem.firstElementChild.setAttribute("data-index", i);
+        elem.firstElementChild.addEventListener("click", toggleRead);
       }
       elem.classList.add(`${ownProp}`);
       book.appendChild(elem);
@@ -108,10 +117,21 @@ function displayLibrary() {
     let deleteBtn = document.createElement("button");
     deleteBtn.textContent = "-";
     deleteBtn.classList.add("deleteBtn");
-    deleteBtn.addEventListener("click", () => {
-      myLibrary.splice(i, 1);
-      displayLibrary();
-    });
+    deleteBtn.setAttribute("data-index", i);
+    deleteBtn.addEventListener("click", removeBook);
     book.appendChild(deleteBtn);
   }
+}
+function removeBook(e) {
+  {
+    myLibrary.splice(e.target.getAttribute("data-index"), 1);
+    displayLibrary();
+    localStorage.setItem("library", JSON.stringify(myLibrary));
+  }
+}
+function toggleRead(e) {
+  let i = e.target.getAttribute("data-index");
+  myLibrary[i].read = !myLibrary[i].read;
+  displayLibrary();
+  localStorage.setItem("library", JSON.stringify(myLibrary));
 }
