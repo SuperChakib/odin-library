@@ -1,0 +1,38 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+  background-color: lightcyan;
+}
+
+#collection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+#collection > div {
+  width: 200px;
+  background-color: blanchedalmond;
+  border: 2px solid salmon;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.author,
+.read {
+  font-style: italic;
+}
+
+.nbPages {
+  text-decoration: underline;
+}
