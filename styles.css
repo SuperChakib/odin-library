@@ -1,8 +1,10 @@
 body {
+  margin: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  gap: 20px;
   height: 100vh;
   background-color: lightcyan;
 }
@@ -10,29 +12,103 @@ body {
 #collection {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 10px;
 }
 
 #collection > div {
   width: 200px;
   background-color: blanchedalmond;
   border: 2px solid salmon;
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 8px;
 }
 
 .title {
   font-size: 20px;
   font-weight: bold;
+  display: flex;
+  justify-content: space-between;
 }
 
-.author,
+.author {
+  text-decoration: underline;
+}
+
+.nbPages,
 .read {
   font-style: italic;
 }
 
-.nbPages {
-  text-decoration: underline;
+button {
+  border: 1px solid black;
+  width: 50px;
+  height: 30px;
+  font-size: 20px;
+  font-weight: bolder;
+  box-shadow: 2px 2px 1px salmon;
+}
+
+#addBook {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+
+button:hover {
+  background-color: lightgray;
+}
+
+button:active {
+  background-color: salmon;
+  box-shadow: none;
+}
+
+#bookForm {
+  background-color: hsla(266, 100%, 7%, 0.63);
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+}
+
+.hiddenForm {
+  display: none;
+}
+
+#bookForm > form {
+  background-color: blanchedalmond;
+  box-shadow: 10px 10px 5px grey;
+  border-radius: 10px;
+  width: 500px;
+  height: 500px;
+  margin: auto;
+  margin-top: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+form > input {
+  width: 100%;
+  height: 40px;
+}
+
+button[type="submit"],
+#cancel {
+  border: 1px solid black;
+  border-radius: 8px;
+  width: 100px;
+  height: 50px;
+  font-size: 24px;
+  font-weight: bolder;
+  box-shadow: 2px 2px 1px salmon;
+}
+
+#error {
+  height: 20px;
+  color: red;
 }

@@ -9,6 +9,18 @@
 <body>
     <h2>Collection</h2>
     <div id="collection"></div>
-    
+    <button id="addBook">+</button>
+    <div class="hiddenForm" id="bookForm">
+        <form action="">
+            <label for="titleForm">Title:<br><input type="text" name="titleForm" id="titleForm" required></label>
+            <label for="authorForm">Author:<br><input type="text" name="authorForm" id="authorForm" required></label>
+            <label for="yearForm">First published in year:<br><input type="number" max='2021' name="yearForm" id="yearForm" required></label>
+            <label for="pagesForm">Nb of pages:<br><input type="number" min="1" name="pagesForm" id="pagesForm" required></label>
+            <label for="readForm">Have you read it?<br><input type="checkbox" name="readForm" id="readForm" required></label>
+            <button type="submit">Submit</button>
+            <p id="error"> </p>
+            <button id="cancel">Cancel</button>
+        </form>
+    </div>
 </body>
 </html>
