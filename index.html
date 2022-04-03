@@ -1,26 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="styles.css">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="styles.css" />
     <script src="script.js" defer></script>
     <title>Library</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Collection of books</h1>
     <div id="collection"></div>
     <button id="addBook">+</button>
     <div class="hiddenForm" id="bookForm">
-        <form action="">
-            <label for="titleForm">Title:<br><input type="text" name="titleForm" id="titleForm" required></label>
-            <label for="authorForm">Author:<br><input type="text" name="authorForm" id="authorForm" required></label>
-            <label for="yearForm">First published in year:<br><input type="number" max='2021' name="yearForm" id="yearForm" required></label>
-            <label for="pagesForm">Nb of pages:<br><input type="number" min="1" name="pagesForm" id="pagesForm" required></label>
-            <label for="readForm">Have you read it?<br><input type="checkbox" name="readForm" id="readForm" required></label>
-            <button type="submit">Submit</button>
-            <p id="error"> </p>
-            <button id="cancel">Cancel</button>
-        </form>
+      <!--whole screen overlay-->
+      <form action="">
+        <!--form within newly shown overlay-->
+        <label for="titleForm"
+          >Title
+          <abbr
+            title="You cannot leave this field empty"
+            aria-label="required"
+            aria-required="true"
+            >*</abbr
+          ><br /><input
+            type="text"
+            name="titleForm"
+            id="titleForm"
+            minlength="2"
+            required
+            placeholder=" "
+        /></label>
+        <label for="authorForm"
+          >Author<abbr
+            title="You cannot leave this field empty"
+            aria-label="required"
+            aria-required="true"
+            >*</abbr
+          ><br /><input
+            type="text"
+            name="authorForm"
+            id="authorForm"
+            required
+            placeholder=" "
+        /></label>
+        <label for="yearForm"
+          >First published in year<abbr
+            title="You cannot leave this field empty"
+            aria-label="required"
+            aria-required="true"
+            >*</abbr
+          ><br /><input
+            type="number"
+            min="-3400"
+            max="2022"
+            name="yearForm"
+            id="yearForm"
+            required
+            placeholder=" "
+        /></label>
+        <label for="pagesForm"
+          >Nb of pages<abbr
+            title="You cannot leave this field empty"
+            aria-label="required"
+            aria-required="true"
+            >*</abbr
+          ><br /><input
+            type="number"
+            min="1"
+            name="pagesForm"
+            id="pagesForm"
+            required
+            placeholder=" "
+        /></label>
+        <label for="readForm"
+          >Have you read it?<br /><input
+            type="checkbox"
+            name="readForm"
+            id="readForm"
+            required
+            placeholder=" "
+        /></label>
+        <button type="submit">Submit</button>
+        <p id="error"></p>
+        <button id="cancel">Cancel</button>
+      </form>
     </div>
-</body>
+  </body>
 </html>

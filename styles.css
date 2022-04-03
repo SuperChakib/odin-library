@@ -11,9 +11,9 @@ body {
 #collection {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 10px;
 }
-
 #collection > div {
   width: 200px;
   background-color: blanchedalmond;
@@ -32,18 +32,16 @@ body {
   display: flex;
   justify-content: space-between;
 }
-
 .author {
   text-decoration: underline;
 }
-
 .nbPages,
 .read {
   font-style: italic;
 }
 
 button {
-  border: 0.1px solid salmon;
+  border: 1px solid salmon;
   width: 50px;
   height: 30px;
   font-size: 20px;
@@ -51,20 +49,17 @@ button {
   box-shadow: 2px 2px 1px salmon;
   color: salmon;
 }
-
+button:hover {
+  background-color: lightgray;
+}
+button:active {
+  background-color: salmon;
+  box-shadow: none;
+}
 #addBook {
   border-radius: 50%;
   width: 50px;
   height: 50px;
-}
-
-button:hover {
-  background-color: lightgray;
-}
-
-button:active {
-  background-color: salmon;
-  box-shadow: none;
 }
 
 #bookForm {
@@ -73,11 +68,9 @@ button:active {
   height: 100vh;
   width: 100vw;
 }
-
 .hiddenForm {
   display: none;
 }
-
 #bookForm > form {
   background-color: blanchedalmond;
   box-shadow: 10px 10px 5px grey;
@@ -86,38 +79,36 @@ button:active {
   height: 500px;
   margin: auto;
   margin-top: 10%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
+  display: grid;
+  grid-template-columns: auto;
+  justify-content: center;
+  align-content: space-evenly;
 }
-
 form > input {
   width: 100%;
   height: 40px;
+  border-style: none;
 }
-
+form > input:not(:focus):not(:placeholder-shown):invalid {
+  border: 1px solid red;
+}
 button[type="submit"],
 #cancel {
-  border: 1px solid salmon;
   border-radius: 8px;
   width: 100px;
   height: 50px;
   font-size: 24px;
   font-weight: bolder;
-  box-shadow: 2px 2px 1px salmon;
+  justify-self: center;
 }
-
 #error {
   height: 20px;
   color: red;
 }
-
 .read,
 .notRead {
   width: 120px;
 }
-
 .read {
   background-color: lightcyan;
 }
