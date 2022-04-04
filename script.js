@@ -94,7 +94,7 @@ function submitBook(e) {
       pagesForm.checkValidity()
     )
   ) {
-    errorMsg.textContent = 'You must fill all fields!';
+    errorMsg.textContent = 'You must fill all fields with correct values!';
     return;
   }
   errorMsg.textContent = '';
